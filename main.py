@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from tkinter import ttk 
+from PIL import Image, ImageTk
 
 # cores --------------------------------
 co0 = "#FFFFFF"  # white / branca
@@ -58,6 +59,36 @@ computador_nome.place(x=205, y=70)
 linha_empate = Label(frame_cima, text="", width='255', anchor='center', font=('Ivy 1 bold'), bg=co0, fg=co0)
 linha_empate.place(x=0, y=95)
 
+# Configurando o frame inferior
+
+#**Configurando os botões, codigo abaixo tem como objetivo carregar imagem, alterar tamanho da imagem
+#criar um botão e atribuir a imagem carregada a esse botão.
+
+# Botões
+icone_pedra = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/pedra.png')
+icone_pedra = icone_pedra.resize((50,50), Image.ANTIALIAS)
+icone_pedra = ImageTk.PhotoImage(icone_pedra)
+botao_pedra = Button(frame_baixo, width=50, image=icone_pedra, compound=CENTER, bg=co0, fg=co0,
+                     font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
+botao_pedra.place(x=15, y=60)
+
+icone_papel = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/papel.png')
+icone_papel = icone_papel.resize((50,50), Image.ANTIALIAS)
+icone_papel = ImageTk.PhotoImage(icone_papel)
+botao_papel = Button(frame_baixo, width=50, image=icone_papel, compound=CENTER, bg=co0, fg=co0,
+                     font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
+botao_papel.place(x=95, y=60)
+
+icone_tesoura = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/tesoura.png')
+icone_tesoura = icone_tesoura.resize((50,50), Image.ANTIALIAS)
+icone_tesoura = ImageTk.PhotoImage(icone_tesoura)
+botao_tesoura = Button(frame_baixo, width=50, image=icone_tesoura, compound=CENTER, bg=co0, fg=co0,
+                     font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
+botao_tesoura.place(x=180, y=60)
+
+botao_jogar = Button(frame_baixo, width=30, text="JOGAR", bg=fundo, fg=co0, font=('Ivy 10 bold'),
+                     anchor=CENTER, relief=RAISED, overrelief=RIDGE)
+botao_jogar.place(x=5, y=151)
 
 # janela executando infinitamente
 janela.mainloop()
