@@ -20,9 +20,6 @@ janela.title('')
 janela.geometry('260x280')
 janela.configure(bg=fundo)
 
-
-
-
 # dividindo a janela 
 frame_cima = Frame(janela, width=260, height=100,bg=co1, relief='raised')
 frame_cima.grid(row= 0, column= 0, sticky= NW)
