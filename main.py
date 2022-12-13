@@ -1,4 +1,5 @@
 import tkinter
+import random
 from tkinter import *
 from tkinter import ttk 
 from PIL import Image, ImageTk
@@ -18,6 +19,8 @@ janela = Tk()
 janela.title('')
 janela.geometry('260x280')
 janela.configure(bg=fundo)
+
+
 
 
 # dividindo a janela 
@@ -65,30 +68,77 @@ linha_empate.place(x=0, y=95)
 #criar um botão e atribuir a imagem carregada a esse botão.
 
 # Botões
-icone_pedra = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/pedra.png')
-icone_pedra = icone_pedra.resize((50,50), Image.ANTIALIAS)
-icone_pedra = ImageTk.PhotoImage(icone_pedra)
-botao_pedra = Button(frame_baixo, width=50, image=icone_pedra, compound=CENTER, bg=co0, fg=co0,
-                     font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
-botao_pedra.place(x=15, y=60)
 
-icone_papel = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/papel.png')
-icone_papel = icone_papel.resize((50,50), Image.ANTIALIAS)
-icone_papel = ImageTk.PhotoImage(icone_papel)
-botao_papel = Button(frame_baixo, width=50, image=icone_papel, compound=CENTER, bg=co0, fg=co0,
-                     font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
-botao_papel.place(x=95, y=60)
 
-icone_tesoura = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/tesoura.png')
-icone_tesoura = icone_tesoura.resize((50,50), Image.ANTIALIAS)
-icone_tesoura = ImageTk.PhotoImage(icone_tesoura)
-botao_tesoura = Button(frame_baixo, width=50, image=icone_tesoura, compound=CENTER, bg=co0, fg=co0,
-                     font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
-botao_tesoura.place(x=180, y=60)
+# Funções do jogo
+# definindo variaveis globais
+global jogador
+global computador
+global rodadas
+global pontos_jogador
+global pontos_computador
+# atribuindo valores iniciais as variaveis
+pontos_jogador = 0
+pontos_computador = 0 
+rodadas = 5 
 
-botao_jogar = Button(frame_baixo, width=30, text="JOGAR", bg=fundo, fg=co0, font=('Ivy 10 bold'),
+# Iniciando a partida
+def jogar(escolha_jogador):
+    rodadas
+    pontos_computador
+    pontos_jogador
+    
+    if rodadas > 0:
+        print(rodadas)
+        opcoes= ['Pedra', 'Papel', 'Tesoura']  
+        computador = random.choice(opcoes) 
+        
+        jogador = escolha_jogador
+        print(f"Computador escolhe:",computador)
+        print(f"Jogador escolhe: ",escolha_jogador)
+    else:
+        encerra_jogo()   
+  
+    
+# Habilitando botoes
+def habilitar_botoes():
+    global icone_papel
+    global icone_pedra
+    global icone_tesoura
+    global botao_papel
+    global botao_pedra
+    global botao_tesoura
+    
+    icone_pedra = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/pedra.png')
+    icone_pedra = icone_pedra.resize((50,50), Image.ANTIALIAS)
+    icone_pedra = ImageTk.PhotoImage(icone_pedra)
+    botao_pedra = Button(frame_baixo,command=lambda: jogar('Pedra'), width=50, image=icone_pedra, compound=CENTER, bg=co0, fg=co0,
+                        font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
+    botao_pedra.place(x=15, y=60)
+
+    icone_papel = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/papel.png')
+    icone_papel = icone_papel.resize((50,50), Image.ANTIALIAS)
+    icone_papel = ImageTk.PhotoImage(icone_papel)
+    botao_papel = Button(frame_baixo,command=lambda: jogar('Papel'), width=50, image=icone_papel, compound=CENTER, bg=co0, fg=co0,
+                        font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
+    botao_papel.place(x=95, y=60)
+
+    icone_tesoura = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/tesoura.png')
+    icone_tesoura = icone_tesoura.resize((50,50), Image.ANTIALIAS)
+    icone_tesoura = ImageTk.PhotoImage(icone_tesoura)
+    botao_tesoura = Button(frame_baixo,command=lambda: jogar('Tesoura'), width=50, image=icone_tesoura, compound=CENTER, bg=co0, fg=co0,
+                        font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
+    botao_tesoura.place(x=180, y=60)
+    
+# Termina partida
+def encerra_jogo():
+    pass  
+
+
+botao_jogar = Button(frame_baixo,command=habilitar_botoes, width=30, text="JOGAR", bg=fundo, fg=co0, font=('Ivy 10 bold'),
                      anchor=CENTER, relief=RAISED, overrelief=RIDGE)
 botao_jogar.place(x=5, y=151)
+
 
 # janela executando infinitamente
 janela.mainloop()
