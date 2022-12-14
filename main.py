@@ -21,8 +21,6 @@ janela.geometry('260x280')
 janela.configure(bg=fundo)
 
 
-
-
 # dividindo a janela 
 frame_cima = Frame(janela, width=260, height=100,bg=co1, relief='raised')
 frame_cima.grid(row= 0, column= 0, sticky= NW)
@@ -58,87 +56,105 @@ computador_vencedor.place(x=255, y=0)
 computador_nome = Label(frame_cima, text="PC", height=1, anchor='center', font=('Ivy 10 bold'), bg=co1, fg=co0)
 computador_nome.place(x=205, y=70)
 
+# Adicionando opção escolhida pelo computador
+opcao_computador = Label(frame_baixo, text="", height=1, anchor='center', font=('Ivy 10 bold'), bg=co0, fg=co0)
+opcao_computador.place(x=190, y=10)
 
 linha_empate = Label(frame_cima, text="", width='255', anchor='center', font=('Ivy 1 bold'), bg=co0, fg=co0)
 linha_empate.place(x=0, y=95)
 
 # Configurando o frame inferior
 
-#**Configurando os botões, codigo abaixo tem como objetivo carregar imagem, alterar tamanho da imagem
+# Configurando os botões, codigo abaixo tem como objetivo carregar imagem, alterar tamanho da imagem
 #criar um botão e atribuir a imagem carregada a esse botão.
 
 # Botões
 
-
 # Funções do jogo
-# definindo variaveis globais
+# Definindo variaveis globais
 global jogador
 global computador
 global rodadas
 global pontos_jogador
 global pontos_computador
-# atribuindo valores iniciais as variaveis
+ # Atribuindo valores iniciais as variaveis
 pontos_jogador = 0
 pontos_computador = 0 
 rodadas = 5 
 
 # Iniciando a partida
 def jogar(escolha_jogador):
-    rodadas
-    pontos_computador
-    pontos_jogador
+    global rodadas  
+    global pontos_jogador 
+    global pontos_computador
     
     if rodadas > 0:
         #print(rodadas)
         opcoes= ['Pedra', 'Papel', 'Tesoura']  
         computador = random.choice(opcoes) 
+        opcao_computador['text']= computador
+        opcao_computador['fg']= co1
         
         # caso empate
         if escolha_jogador == computador :
             print("Empate")
             linha_empate['bg']= co3
             jogador1_vencedor['bg']= co0
-            computador_vencedor['bg']= co0 
-        
+            computador_vencedor['bg']= co0
+                    
         # Jogador vitoria
-        if escolha_jogador == 'Pedra' and computador == 'Tesoura' : 
+        elif escolha_jogador == 'Pedra' and computador == 'Tesoura' : 
             print("Jogador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co4
-            computador_vencedor['bg']= co5 
+            computador_vencedor['bg']= co5
+            pontos_jogador +=10     
+            
         elif escolha_jogador == 'Papel' and computador == 'Pedra' : 
             print("Jogador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co4
             computador_vencedor['bg']= co5
+            pontos_jogador +=10
+                        
         elif escolha_jogador == 'Tesoura' and computador == 'Papel' : 
             print("Jogador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co4
             computador_vencedor['bg']= co5 
+            pontos_jogador +=10  
             
         # Computador vitoria
-        if computador == 'Pedra' and escolha_jogador == 'Tesoura' : 
-            print("Jogador venceu!")
+        elif computador == 'Pedra' and escolha_jogador == 'Tesoura' : 
+            print("Computador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co5
             computador_vencedor['bg']= co4 
+            pontos_computador += 10  
+            
         elif computador == 'Papel' and escolha_jogador == 'Pedra' : 
-            print("Jogador venceu!")
+            print("Computador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co5
             computador_vencedor['bg']= co4
+            pontos_computador += 10  
+            
         elif computador == 'Tesoura' and escolha_jogador == 'Papel' : 
-            print("Jogador venceu!")
+            print("Computador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co5
             computador_vencedor['bg']= co4
-
+            pontos_computador += 10 
+        
+              # Atribuindo pontos ao placar 
+        jogador1_pontos['text'] = pontos_jogador 
+        computador_pontos['text'] = pontos_computador           
+       
+        
+        # Atualizando o número de rodadas 
+        rodadas = rodadas - 1
     else:
-        print(f"jogador: {escolha_jogador}")
-        print(f"jogador: {computador}")
-        encerra_jogo()   
-  
+        encerra_jogo()         
     
 # Habilitando botoes
 def habilitar_botoes():
@@ -169,16 +185,14 @@ def habilitar_botoes():
     botao_tesoura = Button(frame_baixo,command=lambda: jogar('Tesoura'), width=50, image=icone_tesoura, compound=CENTER, bg=co0, fg=co0,
                         font=('Ivy 10 bold'), anchor=CENTER, relief=FLAT)
     botao_tesoura.place(x=180, y=60)
-    
+   
 # Termina partida
 def encerra_jogo():
-    pass  
-
-
+    print("Fim de jogo")
+     
 botao_jogar = Button(frame_baixo,command=habilitar_botoes, width=30, text="JOGAR", bg=fundo, fg=co0, font=('Ivy 10 bold'),
                      anchor=CENTER, relief=RAISED, overrelief=RIDGE)
 botao_jogar.place(x=5, y=151)
-
 
 # janela executando infinitamente
 janela.mainloop()
