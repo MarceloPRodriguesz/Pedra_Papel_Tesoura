@@ -20,6 +20,9 @@ janela.title('')
 janela.geometry('260x280')
 janela.configure(bg=fundo)
 
+
+
+
 # dividindo a janela 
 frame_cima = Frame(janela, width=260, height=100,bg=co1, relief='raised')
 frame_cima.grid(row= 0, column= 0, sticky= NW)
@@ -86,14 +89,54 @@ def jogar(escolha_jogador):
     pontos_jogador
     
     if rodadas > 0:
-        print(rodadas)
+        #print(rodadas)
         opcoes= ['Pedra', 'Papel', 'Tesoura']  
         computador = random.choice(opcoes) 
         
-        jogador = escolha_jogador
-        print(f"Computador escolhe:",computador)
-        print(f"Jogador escolhe: ",escolha_jogador)
+        # caso empate
+        if escolha_jogador == computador :
+            print("Empate")
+            linha_empate['bg']= co3
+            jogador1_vencedor['bg']= co0
+            computador_vencedor['bg']= co0 
+        
+        # Jogador vitoria
+        if escolha_jogador == 'Pedra' and computador == 'Tesoura' : 
+            print("Jogador venceu!")
+            linha_empate['bg']= co0
+            jogador1_vencedor['bg']= co4
+            computador_vencedor['bg']= co5 
+        elif escolha_jogador == 'Papel' and computador == 'Pedra' : 
+            print("Jogador venceu!")
+            linha_empate['bg']= co0
+            jogador1_vencedor['bg']= co4
+            computador_vencedor['bg']= co5
+        elif escolha_jogador == 'Tesoura' and computador == 'Papel' : 
+            print("Jogador venceu!")
+            linha_empate['bg']= co0
+            jogador1_vencedor['bg']= co4
+            computador_vencedor['bg']= co5 
+            
+        # Computador vitoria
+        if computador == 'Pedra' and escolha_jogador == 'Tesoura' : 
+            print("Jogador venceu!")
+            linha_empate['bg']= co0
+            jogador1_vencedor['bg']= co5
+            computador_vencedor['bg']= co4 
+        elif computador == 'Papel' and escolha_jogador == 'Pedra' : 
+            print("Jogador venceu!")
+            linha_empate['bg']= co0
+            jogador1_vencedor['bg']= co5
+            computador_vencedor['bg']= co4
+        elif computador == 'Tesoura' and escolha_jogador == 'Papel' : 
+            print("Jogador venceu!")
+            linha_empate['bg']= co0
+            jogador1_vencedor['bg']= co5
+            computador_vencedor['bg']= co4
+
     else:
+        print(f"jogador: {escolha_jogador}")
+        print(f"jogador: {computador}")
         encerra_jogo()   
   
     
