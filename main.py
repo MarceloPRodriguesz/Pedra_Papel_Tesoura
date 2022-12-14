@@ -97,28 +97,24 @@ def jogar(escolha_jogador):
         
         # caso empate
         if escolha_jogador == computador :
-            print("Empate")
             linha_empate['bg']= co3
             jogador1_vencedor['bg']= co0
             computador_vencedor['bg']= co0
                     
         # Jogador vitoria
         elif escolha_jogador == 'Pedra' and computador == 'Tesoura' : 
-            print("Jogador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co4
             computador_vencedor['bg']= co5
             pontos_jogador +=10     
             
         elif escolha_jogador == 'Papel' and computador == 'Pedra' : 
-            print("Jogador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co4
             computador_vencedor['bg']= co5
             pontos_jogador +=10
                         
         elif escolha_jogador == 'Tesoura' and computador == 'Papel' : 
-            print("Jogador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co4
             computador_vencedor['bg']= co5 
@@ -126,21 +122,18 @@ def jogar(escolha_jogador):
             
         # Computador vitoria
         elif computador == 'Pedra' and escolha_jogador == 'Tesoura' : 
-            print("Computador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co5
             computador_vencedor['bg']= co4 
             pontos_computador += 10  
             
         elif computador == 'Papel' and escolha_jogador == 'Pedra' : 
-            print("Computador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co5
             computador_vencedor['bg']= co4
             pontos_computador += 10  
             
         elif computador == 'Tesoura' and escolha_jogador == 'Papel' : 
-            print("Computador venceu!")
             linha_empate['bg']= co0
             jogador1_vencedor['bg']= co5
             computador_vencedor['bg']= co4
@@ -154,6 +147,9 @@ def jogar(escolha_jogador):
         # Atualizando o número de rodadas 
         rodadas = rodadas - 1
     else:
+        jogador1_pontos['text'] = pontos_jogador 
+        computador_pontos['text'] = pontos_computador
+        
         encerra_jogo()         
     
 # Habilitando botoes
@@ -164,6 +160,8 @@ def habilitar_botoes():
     global botao_papel
     global botao_pedra
     global botao_tesoura
+    
+    botao_jogar.destroy()
     
     icone_pedra = Image.open('C:/Users/USUARIO/OneDrive/Documentos/Projetos/PedraPapelTesoura/Imagens/pedra.png')
     icone_pedra = icone_pedra.resize((50,50), Image.ANTIALIAS)
@@ -188,8 +186,49 @@ def habilitar_botoes():
    
 # Termina partida
 def encerra_jogo():
-    print("Fim de jogo")
-     
+    global rodadas  
+    global pontos_jogador 
+    global pontos_computador
+    
+    # Reiniciando variaveis
+    pontos_jogador = 0
+    pontos_computador = 0 
+    rodadas = 5 
+    
+    # Destruindo botões 
+    botao_papel.destroy()
+    botao_tesoura.destroy()
+    botao_pedra.destroy()
+    
+    # Definindo vencedor
+    total_jogador = int(jogador1_pontos['text'])
+    total_computador = int(computador_pontos['text'])
+    
+    if total_jogador > total_computador:
+        vencedor = Label(frame_baixo, text="Parabéns, você ganhou!", height=1, anchor='center', font=('Ivy 10 bold'), bg=co0, fg=co4)
+        vencedor.place(x=5, y=60)
+    elif total_computador > total_jogador:
+        vencedor = Label(frame_baixo, text="Infelizmente, você perdeu!", height=1, anchor='center', font=('Ivy 10 bold'), bg=co0, fg=co5)
+        vencedor.place(x=5, y=60)
+    else:
+        vencedor = Label(frame_baixo, text="Esta partida terminou empatada!", height=1, anchor='center', font=('Ivy 10 bold'), bg=co0, fg=co3)
+        vencedor.place(x=5, y=60)
+        
+    def jogar_novamente():
+        computador_pontos['text']= '0'
+        jogador1_pontos['text'] = '0'
+        vencedor.destroy()
+        
+        botao_jogar_novamente.destroy()
+        
+        habilitar_botoes()
+        
+    botao_jogar_novamente = Button(frame_baixo,command=jogar_novamente, width=30, text="JOGAR NOVAMENTE", bg=fundo, fg=co0, font=('Ivy 10 bold'),
+                     anchor=CENTER, relief=RAISED, overrelief=RIDGE)
+    botao_jogar_novamente.place(x=5, y=151)
+    
+ 
+# Configurações do botão jogar     
 botao_jogar = Button(frame_baixo,command=habilitar_botoes, width=30, text="JOGAR", bg=fundo, fg=co0, font=('Ivy 10 bold'),
                      anchor=CENTER, relief=RAISED, overrelief=RIDGE)
 botao_jogar.place(x=5, y=151)
