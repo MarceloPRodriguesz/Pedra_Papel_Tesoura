@@ -26,6 +26,9 @@ Após isso o placar é computado ao vencedor:
 
 A partida tem duração de cinco rodadas, vence aquele que marcar a maior pontuação nessas rodadas.
 
+##
+
+# Vídeo de execução do programa
 
 
 ## Tecnologias utilizadas
